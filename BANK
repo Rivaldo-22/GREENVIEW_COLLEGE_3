@@ -1,0 +1,74 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class BankAIAssistant {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the Bank AI Assistant!");
+        System.out.println("How can I assist you today?");
+
+        while (true) {
+            String userInput = scanner.nextLine();
+
+            // Check if the user wants to inquire about the account balance
+            if (userInput.contains("balance")) {
+                String accountType = getAccountType(userInput);
+                double balance = getAccountBalance(accountType); // Dummy method to get balance
+
+                if (balance != -1) {
+                    System.out.println("Your " + accountType + " account balance is: $" + balance);
+                } else {
+                    System.out.println("Sorry, I couldn't retrieve your account balance at the moment.");
+                }
+            } else if (userInput.equalsIgnoreCase("exit")) {
+                System.out.println("Thank you for using the Bank AI Assistant. Goodbye!");
+                break;
+            } else {
+                System.out.println("I'm sorry, I didn't understand your request. How can I assist you?");
+            }
+        }
+
+        scanner.close();
+    }
+
+    // Dummy method to simulate fetching account balance from the database
+    private static double getAccountBalance(String accountType) {
+        // Simulate fetching balance from database based on account type
+        if (accountType.equalsIgnoreCase("savings")) {
+            return 5000.0;
+        } else if (accountType.equalsIgnoreCase("checking")) {
+            return 2000.0;
+        } else {
+            return -1; // Return -1 if unable to retrieve balance
+        }
+    }
+
+    // Method to extract account type from user query
+    private static String getAccountType(String userInput) {
+        if (userInput.contains("savings")) {
+            return "savings";
+        } else if (userInput.contains("checking")) {
+            return "checking";
+        } else {
+            return "unknown"; // Return unknown if account type is not specified
+        }
+    }
+}
+
